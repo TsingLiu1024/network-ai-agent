@@ -1,0 +1,70 @@
+# ======================
+# Web Framework
+# ======================
+
+fastapi
+uvicorn[standard]
+
+
+
+# ======================
+# AI Framework
+# ======================
+
+langchain
+langchain-text-splitters
+langchain-community
+langchain-huggingface
+
+
+
+# ======================
+# Vector Database / RAG
+# ======================
+
+faiss-cpu
+sentence-transformers
+
+
+
+# ======================
+# LLM Provider
+# ======================
+
+ollama
+openai
+
+
+
+# ======================
+# Configuration
+# ======================
+
+python-dotenv
+pydantic-settings
+
+
+
+# ======================
+# HTTP
+# ======================
+
+requests
+
+
+
+# ======================
+# System Tools
+# ======================
+
+psutil
+
+
+
+# ======================
+# Development
+# ======================
+
+pytest
+black
+ruff
