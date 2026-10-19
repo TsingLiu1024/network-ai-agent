@@ -1,13 +1,4 @@
+from .builder import RAGBuilder
 from .retriever import Retriever
 
-from .builder import RAGBuilder
-
-
-
-__all__ = [
-
-    "Retriever",
-
-    "RAGBuilder"
-
-]
+__all__ = ["Retriever", "RAGBuilder"]

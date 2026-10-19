@@ -18,25 +18,15 @@ class ToolResult:
 
     error: Optional[str] = None
 
-    metadata: Dict[str, Any] = field(
-        default_factory=dict
-    )
-
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self):
 
         return {
-
             "tool": self.tool,
-
             "success": self.success,
-
             "data": self.data,
-
             "message": self.message,
-
             "error": self.error,
-
-            "metadata": self.metadata
-
+            "metadata": self.metadata,
         }

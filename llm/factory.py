@@ -1,40 +1,13 @@
-import os
+from config.settings import settings
 
+from .deepseek import DeepSeekLLM
 from .demo import DemoLLM
 from .ollama import OllamaLLM
 from .openai import OpenAILLM
-from .deepseek import DeepSeekLLM
 
 
-
-def get_llm():
-
-    provider = os.getenv(
-        "LLM_PROVIDER",
-        "ollama"
-    ).lower()
-
-
-    if provider == "ollama":
-
-        return OllamaLLM()
-
-
-    if provider == "openai":
-
-        return OpenAILLM()
-
-
-    if provider == "deepseek":
-
-        return DeepSeekLLM()
-
-
-    if provider == "demo":
-
-        return DemoLLM()
-
-
-    raise ValueError(
-        f"Unsupported LLM provider: {provider}"
-    )
+def get_llm(config=None):
+    config = config or settings
+    return {"ollama": OllamaLLM, "openai": OpenAILLM, "deepseek": DeepSeekLLM, "demo": DemoLLM}[
+        config.MODEL_PROVIDER
+    ](config)

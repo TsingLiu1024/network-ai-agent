@@ -1,96 +1,16 @@
-\# Changelog
+# Changelog
 
+## 2.1.0 — 2026-10-19 (unreleased)
 
+- Centralized validated model configuration and compatibility aliases.
+- Propagated model failures and distinguished complete/partial/failed/demo outcomes.
+- Connected real read-only measurements and gated local/cloud evidence collection.
+- Reduced inference to two calls with prompt budgets, timeouts and bounded admission.
+- Validated structured repair suggestions; disabled generic shell execution.
+- Replaced pickle persistence with validated atomic JSON vector snapshots and provenance.
+- Added offline regressions, cross-platform CI, retrieval evaluation and deployment docs.
+- Hardened container permissions, localhost exposure, auth and request/body limits.
 
+## 2.0.0
 
-
-All notable changes are documented here.
-
-
-
-
-
-
-
-\## \[2.0.0] - 2026-09-15
-
-
-
-
-
-\### Added
-
-
-
-\- New Multi-Agent architecture
-
-\- LLM abstraction layer
-
-\- RAG pipeline improvement
-
-\- Cloud/local LLM support
-
-\- Docker deployment support
-
-
-
-
-
-\### Changed
-
-
-
-\- Refactored Agent system
-
-\- Improved project structure
-
-
-
-
-
-\### Removed
-
-
-
-\- Direct Ollama dependency from agents
-
-
-
-
-
-
-
-\---
-
-
-
-
-
-\## \[1.0.0]
-
-
-
-
-
-Initial release.
-
-
-
-
-
-Features:
-
-
-
-\- FastAPI service
-
-\- RAG retrieval
-
-\- Ollama integration
-
-\- Network diagnosis
-
-\- PowerShell repair scripts
-
-
-
+Original multi-agent, RAG, local/cloud providers and FastAPI service.

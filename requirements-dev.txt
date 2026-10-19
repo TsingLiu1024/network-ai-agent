@@ -1,0 +1,5 @@
+-r requirements-core.txt
+pytest>=8.3,<10
+pytest-cov>=7.1,<8
+httpx>=0.28.1,<0.29
+ruff>=0.16,<0.17

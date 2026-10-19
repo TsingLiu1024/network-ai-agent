@@ -1,162 +1,53 @@
 from agents.core.base_agent import BaseAgent
 from agents.core.result import AgentResult
-
+from config.settings import settings
 from rag import Retriever
-
-from llm import get_llm
-
 
 
 class RAGAgent(BaseAgent):
+    def __init__(self, config=None, retriever=None):
+        super().__init__("rag_agent", "Source-bearing retrieval without repeated inference")
+        self.config = config or settings
+        self.retriever = retriever or Retriever(self.config)
+        self.ready = False
+        self.error = None
 
-
-    def __init__(self):
-
-
-        super().__init__(
-
-            name="rag_agent",
-
-            description="Knowledge retrieval and reasoning agent"
-
-        )
-
-
-        self.retriever = Retriever()
-
-
-        self.llm = get_llm()
-
-
-
-    def run(
-
-        self,
-
-        query: str
-
-    ) -> AgentResult:
-
-
+    def prepare(self):
+        if not self.config.ENABLE_RAG:
+            return
         try:
+            self.retriever.prepare()
+            self.ready = True
+            self.error = None
+        except Exception:
+            self.ready = False
+            self.error = "RAG preparation failed; check local model and knowledge files"
 
-
-            # 1. 检索知识库
-
-            docs = (
-
-                self.retriever
-
-                .search(
-
-                    query
-
-                )
-
-            )
-
-
-            context = "\n\n".join(
-
-                docs
-
-            )
-
-
-
-            # 2. 构造Prompt
-
-            prompt = f"""
-
-你是一个专业的网络故障诊断专家。
-
-
-用户问题:
-
-{query}
-
-
-
-知识库内容:
-
-{context}
-
-
-
-请根据用户问题和知识库内容进行分析。
-
-
-输出格式:
-
-问题分析:
-xxx
-
-
-可能原因:
-1.xxx
-2.xxx
-
-
-解决方案:
-1.xxx
-2.xxx
-
-
-注意:
-不要编造不存在的信息。
-
-"""
-
-
-
-            # 3. 调用LLM
-
-            answer = (
-
-                self.llm
-
-                .chat(
-
-                    prompt
-
-                )
-
-            )
-
-
-
+    def run(self, query):
+        if not self.config.ENABLE_RAG:
             return AgentResult(
-
-                agent=self.name,
-
-                success=True,
-
-                data={
-
-                    "documents": docs,
-
-                    "analysis": answer
-
-                },
-
-                message="知识检索与分析完成"
-
+                self.name, False, message="RAG disabled", metadata={"status": "skipped"}
             )
-
-
-
-        except Exception as e:
-
-
-
+        if not self.ready:
             return AgentResult(
-
-                agent=self.name,
-
-                success=False,
-
-                data={},
-
-                message=f"知识检索失败: {str(e)}"
-
+                self.name,
+                False,
+                message=self.error or "RAG not prepared",
+                metadata={"error_code": "rag_unavailable"},
+            )
+        try:
+            docs = self.retriever.search(query)
+            return AgentResult(
+                self.name,
+                True,
+                data={"documents": docs},
+                message="Knowledge retrieved",
+                metadata={"matched": bool(docs)},
+            )
+        except Exception:
+            return AgentResult(
+                self.name,
+                False,
+                message="Knowledge retrieval failed",
+                metadata={"error_code": "rag_unavailable"},
             )

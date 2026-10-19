@@ -18,6 +18,7 @@ __pycache__/
 .env
 
 .env.*
+!.env.example
 
 
 
@@ -106,3 +107,8 @@ Thumbs.db
 # ======================
 
 .pytest_cache/
+.ruff_cache/
+model_cache/
+.coverage
+coverage.xml
+htmlcov/

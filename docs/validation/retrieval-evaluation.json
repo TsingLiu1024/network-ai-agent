@@ -1,0 +1,46 @@
+{
+  "cases": 4,
+  "hit_at_k": 1.0,
+  "mrr": 0.8333333333333333,
+  "details": [
+    {
+      "query": "Windows 域名解析失败，IP 可以访问，先检查什么？",
+      "sources": [
+        "linux.md",
+        "proxy.md",
+        "dns.md"
+      ],
+      "rank": 3
+    },
+    {
+      "query": "配置代理后浏览器无法上网，如何检查 HTTP_PROXY？",
+      "sources": [
+        "proxy.md",
+        "linux.md",
+        "dns.md"
+      ],
+      "rank": 1
+    },
+    {
+      "query": "WSL 子系统内 resolv.conf 和宿主 DNS 不一致",
+      "sources": [
+        "wsl.md",
+        "linux.md",
+        "dns.md"
+      ],
+      "rank": 1
+    },
+    {
+      "query": "Linux 容器里 ping -n 不工作，应该怎样检测路由？",
+      "sources": [
+        "linux.md",
+        "proxy.md",
+        "dns.md"
+      ],
+      "rank": 1
+    }
+  ],
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "elapsed_seconds": 80.84,
+  "label": "small repository smoke dataset; not a general accuracy benchmark"
+}
