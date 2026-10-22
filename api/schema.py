@@ -1,36 +1,19 @@
-from pydantic import BaseModel, Field
-from typing import Optional, Dict, Any
+from typing import Any, Literal
 
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field
 
 
 class DiagnoseRequest(BaseModel):
-    """
-    用户诊断请求
-    """
-
+    model_config = ConfigDict(extra="forbid", populate_by_name=True, str_strip_whitespace=True)
     question: str = Field(
-        ...,
-        description="用户描述的网络问题"
+        min_length=1, max_length=2000, validation_alias=AliasChoices("question", "problem")
     )
-
-
-    user_id: Optional[str] = Field(
-        default=None,
-        description="用户ID"
-    )
-
+    user_id: str | None = Field(default=None, max_length=100)
 
 
 class DiagnoseResponse(BaseModel):
-    """
-    诊断响应
-    """
-
-
     success: bool
-
-
+    status: Literal["success", "partial", "failed", "demo"]
     question: str
-
-
-    result: Dict[str, Any]
+    request_id: str
+    result: dict[str, Any]

@@ -1,0 +1,315 @@
+{
+  "source": "PyPI version JSON API",
+  "packages": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "vulnerabilities": []
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.18",
+      "vulnerabilities": []
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "vulnerabilities": []
+    },
+    {
+      "name": "coverage",
+      "version": "7.16.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "faiss-cpu",
+      "version": "1.15.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "fastapi",
+      "version": "0.146.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "filelock",
+      "version": "3.32.7",
+      "vulnerabilities": []
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "vulnerabilities": []
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.33.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "vulnerabilities": []
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "vulnerabilities": []
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.4",
+      "vulnerabilities": []
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "networkx",
+      "version": "3.7",
+      "vulnerabilities": []
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "vulnerabilities": []
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.50.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.16.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.1.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.4",
+      "vulnerabilities": []
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "vulnerabilities": []
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.29",
+      "vulnerabilities": []
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "vulnerabilities": []
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "ruff",
+      "version": "0.16.10",
+      "vulnerabilities": []
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.9.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "sentence-transformers",
+      "version": "6.1.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "vulnerabilities": []
+    },
+    {
+      "name": "starlette",
+      "version": "1.9.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "vulnerabilities": []
+    },
+    {
+      "name": "torch",
+      "version": "2.14.1+cpu",
+      "vulnerabilities": []
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "transformers",
+      "version": "5.20.1",
+      "vulnerabilities": []
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3",
+      "vulnerabilities": []
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "vulnerabilities": []
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "vulnerabilities": []
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "vulnerabilities": []
+    }
+  ]
+}

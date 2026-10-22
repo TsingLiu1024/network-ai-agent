@@ -1,0 +1,6 @@
+[
+  {"query":"Windows 域名解析失败，IP 可以访问，先检查什么？","expected_source":"dns.md"},
+  {"query":"配置代理后浏览器无法上网，如何检查 HTTP_PROXY？","expected_source":"proxy.md"},
+  {"query":"WSL 子系统内 resolv.conf 和宿主 DNS 不一致","expected_source":"wsl.md"},
+  {"query":"Linux 容器里 ping -n 不工作，应该怎样检测路由？","expected_source":"linux.md"}
+]

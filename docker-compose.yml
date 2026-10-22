@@ -1,33 +1,26 @@
-version: "3.9"
-
-
 services:
-
   network-ai-agent:
-
-    build:
-      context: .
-
-    container_name:
-      network-ai-agent
-
-
+    build: .
     ports:
-
-      - "8000:8000"
-
-
+      - "127.0.0.1:8000:8000"
     env_file:
-
       - .env
-
-
+    environment:
+      HF_HOME: /app/model_cache
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
-
-      - ./knowledge:/app/knowledge
-
-      - ./vector_db:/app/vector_db
-
-
-    restart:
-      unless-stopped
+      - ./knowledge:/app/knowledge:ro
+      - vector_db:/app/vector_db
+      - model_cache:/app/model_cache
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    # ICMP ping may need host kernel ping_group_range configuration.
+    pids_limit: 128
+    mem_limit: 3g
+volumes:
+  vector_db:
+  model_cache:

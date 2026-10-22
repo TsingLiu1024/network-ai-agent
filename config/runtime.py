@@ -1,6 +1,4 @@
 class RuntimeContext:
-
-
     def __init__(self):
 
         self.agent_manager = None
@@ -8,7 +6,6 @@ class RuntimeContext:
         self.vector_store = None
 
         self.llm = None
-
 
 
 runtime = RuntimeContext()

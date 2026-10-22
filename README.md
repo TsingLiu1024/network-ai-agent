@@ -1,686 +1,151 @@
-# 🤖 Network AI Agent
+# Network AI Agent
 
+基于 FastAPI 的网络排障助手：读取可选的服务器检测证据，检索知识库，
+生成经过结构校验的修复建议与诊断报告。支持 Ollama、DeepSeek、OpenAI，
+提供不联网的 demo 模式。
 
-<p align="center">
+**当前边界：只生成修复建议，诊断 API 不执行修复命令。检测对象是运行 API
+的主机或容器，不是浏览器客户端的设备。没有测量结果时报告必须说明证据不足。**
 
-A Multi-Agent AI framework for intelligent network diagnosis,
-troubleshooting and automation.
+## 快速开始
 
-</p>
-
-
-<p align="center">
-
-Python · FastAPI · RAG · Agent · LLM
-
-</p>
-
-
----
-
-# 📖 Introduction
-
-
-Network AI Agent is an intelligent network troubleshooting system
-based on Multi-Agent architecture.
-
-
-It combines:
-
-- Large Language Models (LLM)
-- Retrieval Augmented Generation (RAG)
-- Agent Collaboration
-- System Diagnostic Tools
-
-
-The goal is to build an AI-powered SRE assistant that can analyze,
-diagnose and provide automated repair suggestions for network problems.
-
-
-
----
-
-# ✨ Features
-
-
-## 🤖 Multi-Agent Architecture
-
-
-The system uses multiple specialized agents:
-
-
-```
-                    User
-                     |
-                     |
-              Supervisor Agent
-                     |
-              Agent Manager
-                     |
-     --------------------------------
-     |              |               |
- Network        Log Agent       RAG Agent
- Agent
-     |
-     |
- Repair Agent
-```
-
-
-Each Agent focuses on different tasks:
-
-
-| Agent | Function |
-|-|-|
-| Network Agent | Network status analysis |
-| Log Agent | Windows/Linux log analysis |
-| RAG Agent | Knowledge retrieval |
-| Repair Agent | Generate repair suggestions |
-| Supervisor Agent | Task coordination |
-
-
-
----
-
-# 🧠 RAG Knowledge System
-
-
-Network AI Agent integrates a Retrieval Augmented Generation pipeline.
-
-
-Architecture:
-
-
-```
-Knowledge Documents
-
-        |
-        |
-
-Document Loader
-
-        |
-        |
-
-Text Splitter
-
-        |
-        |
-
-Embedding Model
-
-        |
-        |
-
-FAISS Vector Database
-
-        |
-        |
-
-Retriever
-
-        |
-        |
-
-LLM Reasoning
-
-```
-
-
-Supported knowledge:
-
-- DNS troubleshooting
-- Proxy problems
-- WSL network issues
-- Linux network diagnosis
-- OpenWRT troubleshooting
-
-
-
----
-
-# 🔌 LLM Providers
-
-
-Supported providers:
-
-
-| Provider | Status |
-|-|-|
-| Ollama | ✅ |
-| DeepSeek API | ✅ |
-| OpenAI API | ✅ |
-
-
-Switch provider:
-
-
-```env
-MODEL_PROVIDER=ollama
-```
-
-
-or
-
-
-```env
-MODEL_PROVIDER=deepseek
-```
-
-
-Example:
-
-
-```env
-MODEL_PROVIDER=deepseek
-
-DEEPSEEK_API_KEY=your_api_key
-```
-
-
-
-⚠️ Never commit `.env` files containing API keys.
-
-
-
----
-
-# 🛠 Automatic Diagnosis & Repair
-
-
-The system can generate:
-
-
-- Network diagnosis report
-- Log analysis
-- Knowledge-based solutions
-- Repair commands
-
-
-Example:
-
-
-User:
-
-
-```
-Windows DNS解析失败，无法访问网站
-```
-
-
-System:
-
-
-```
-Analysis:
-
-DNS configuration problem detected
-
-
-Knowledge:
-
-DNS cache and resolver configuration
-
-
-Suggestion:
-
-ipconfig /flushdns
-
-netsh winsock reset
-
-```
-
-
-
----
-
-# 🏗 System Architecture
-
-
-```
-
-                 Client
-
-                   |
-
-                FastAPI
-
-                   |
-
-            Supervisor Agent
-
-                   |
-
-             Agent Manager
-
-                   |
-
-      --------------------------------
-
-      |              |              |
-
- Network        Log Agent       RAG Agent
-
-
-                   |
-
-             Repair Agent
-
-
-                   |
-
-                  LLM
-
-
-      --------------------------------
-
-      |                            |
-
-   Ollama                      Cloud API
-
-                             
-```
-
-
-
----
-
-# 🚀 Installation
-
-
-## 1. Clone Repository
-
+需要 Python 3.12 或 3.13。Windows 和 Linux 均可运行；Windows 事件日志只在
+Windows 主机上提供。macOS 可使用模型建议，网络探测尚未完整验证。
 
 ```bash
 git clone https://github.com/TsingLiu1024/network-ai-agent.git
-
 cd network-ai-agent
-```
-
-
-
----
-
-## 2. Create Virtual Environment
-
-
-```bash
 python -m venv .venv
 ```
 
-
-Activate:
-
-
-Windows:
-
-
-```powershell
-.venv\Scripts\activate
-```
-
-
-
-Linux:
-
+Windows PowerShell：` .venv\Scripts\Activate.ps1 `
+Linux/macOS：`source .venv/bin/activate`
 
 ```bash
-source .venv/bin/activate
+python -m pip install --require-hashes -r requirements.lock
 ```
 
+复制 `.env.example` 为 `.env`，设置模型与凭证。默认 Ollama：
 
-
----
-
-## 3. Install Dependencies
-
-
-```bash
-pip install -r requirements.txt
-```
-
-
-
----
-
-# ⚙️ Configuration
-
-
-Create:
-
-
-```
-.env
-```
-
-
-Example:
-
-
-```env
-# LLM
-
+```dotenv
 MODEL_PROVIDER=ollama
-
-
-# Ollama
-
+OLLAMA_URL=http://localhost:11434
 OLLAMA_MODEL=deepseek-r1:7b
-
-
-
-# DeepSeek
-
-DEEPSEEK_API_KEY=your_key
-
-
-# RAG
-
-VECTOR_DB_PATH=vector_db
-
-KNOWLEDGE_PATH=knowledge
-
-
-
-# Token Optimization
-
-ENABLE_TOKEN_OPTIMIZER=true
-
 ```
 
-
-
----
-
-# ▶ Running
-
-
-Start API:
-
+先用 Ollama 拉取配置的模型。然后启动：
 
 ```bash
-python -m uvicorn app:app --reload
+ollama pull deepseek-r1:7b
+python -m uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
+API 文档：[Swagger UI](http://127.0.0.1:8000/docs)。
+`/health` 是存活检查；`/ready` 返回初始化状态及 RAG 是否降级，
+不代表外部模型当前可用。
 
-Default:
+### 完全离线演示
 
+仅安装 `requirements-core.txt` 即可。设置：
 
-```
-http://127.0.0.1:8000
-```
-
-
-API Documentation:
-
-
-```
-http://127.0.0.1:8000/docs
+```dotenv
+MODEL_PROVIDER=demo
+ENABLE_RAG=false
+COLLECT_LOCAL_EVIDENCE=false
 ```
 
+demo 返回明确标识的演示文本，不进行模型推理或真实诊断。
 
+## 请求与结果
 
----
-
-# 📡 API Example
-
-
-## Request
-
-
-POST:
-
-
-```
-/diagnose
+```bash
+curl -X POST http://127.0.0.1:8000/api/v1/diagnose -H "Content-Type: application/json" -d '{"question":"Windows DNS 解析失败"}'
 ```
 
+配置 `API_KEY` 后，增加 `X-API-Key` 请求头。问题限 1–2000 字符，请求体
+限 16000 字节。旧的 `/diagnose` 路径和 `problem` 字段作为兼容入口保留；
+新代码应使用 `/api/v1/diagnose` 与 `question`。
 
-JSON:
+响应含 `request_id`、`status` 和 `result.stages`。每阶段都有
+`success/data/message/metadata`：
 
+| status | success | 含义 |
+| --- | --- | --- |
+| success | true | 必需推理及实际检测成功 |
+| partial | false | 有可用建议，但检测缺失或某阶段降级 |
+| failed | false | 最终诊断生成失败，HTTP 502 |
+| demo | true | 明确标识的离线演示结果 |
 
-```json
-{
-    "problem":
-    "Windows DNS解析失败，无法访问网站"
-}
+容量用尽返回 503 与 Retry-After，超时返回 504，输入不合法返回 422。
+修复建议包含结构化 reason、steps、commands；命令带适用平台、权限、风险及
+验证方法，`execution_enabled` 始终为 false。JSON 校验保证结构，不保证模型
+建议在你的环境中正确；执行前必须结合现场证据人工审查。
+
+## 本机检测与日志隐私
+
+默认不读取服务器日志或进行服务器网络探测。需要诊断部署主机时设置：
+
+```dotenv
+COLLECT_LOCAL_EVIDENCE=true
 ```
 
+使用云端模型还需要 `ALLOW_CLOUD_LOG_UPLOAD=true`，才会采集并发送本机证据。
+日志可能包含主机名、路径和业务信息；凭证模式会作尽力脱敏，不能保证覆盖所有
+敏感字段。只为可信用户开放带检测权限的 API。
 
+网络探测是到 `1.1.1.1` 的一次 ping 和对 `github.com` 的 DNS 查询，
+两者失败不等于整个网络不可用。Linux 需要 `ping`、`nslookup` 命令。
+Windows 采集最近 20 条 System 警告/错误事件，权限不足会明确降级。
+容器内探测只代表容器；不提供容器到 Windows 宿主事件日志的访问。
 
-## Response Example
+## RAG 知识库
 
+支持 `KNOWLEDGE_PATH` 下的 UTF-8 `.txt/.md`。默认使用可配置的多语言
+sentence-transformers 模型。首次预加载需要下载模型：
 
-```json
-{
-    "success": true,
-    "result": {
-
-        "network": {
-            "message":
-            "网络检测完成"
-        },
-
-
-        "rag": {
-            "message":
-            "知识检索完成"
-        },
-
-
-        "repair": {
-            "suggestions":[
-                {
-                    "action":
-                    "reset dns",
-
-                    "command":
-                    "ipconfig /flushdns"
-                }
-            ]
-        }
-
-    }
-}
+```bash
+# Linux/macOS
+EMBEDDING_LOCAL_ONLY=false python -m rag.builder
 ```
 
-
-
----
-
-# 📂 Project Structure
-
-
-```
-network-ai-agent/
-
-│
-
-├── agents/
-
-│   ├── network_agent.py
-
-│   ├── log_agent.py
-
-│   ├── rag_agent.py
-
-│   ├── repair_agent.py
-
-│   └── core/
-
-│       ├── manager.py
-
-│       ├── supervisor_agent.py
-
-│       └── result.py
-
-
-├── rag/
-
-│   ├── builder.py
-
-│   ├── retriever.py
-
-│   ├── vectorstore.py
-
-│   └── loader.py
-
-
-├── llm/
-
-│   ├── ollama.py
-
-│   ├── deepseek.py
-
-│   ├── openai.py
-
-│   └── factory.py
-
-
-├── knowledge/
-
-│   └── network_docs.txt
-
-
-├── app.py
-
-├── requirements.txt
-
-└── README.md
-
+PowerShell：
+```powershell
+$env:EMBEDDING_LOCAL_ONLY = 'false'
+python -m rag.builder
+Remove-Item Env:EMBEDDING_LOCAL_ONLY
 ```
 
+之后保持 `EMBEDDING_LOCAL_ONLY=true`，服务启动只使用本地模型。
+缺少模型或知识库时 RAG 会降级，API 仍可提供明确缺少检索依据的建议。
+用 `ENABLE_RAG=false` 可完全关闭检索。模型加载发生在启动准备阶段，
+不发生在 API 模块导入或诊断请求内。
 
+检索返回相似度、来源文件和 chunk_id，低于阈值不返回。安全 JSON 快照保存文档
+与向量，在内存中创建 FAISS 索引；不加载旧 pickle/FAISS 二进制索引。
+启动时检查知识内容、模型配置及快照校验和，必要时在文件锁保护下重建。
+更新知识后重新运行构建并重启服务，运行中使用已经加载的快照。
+向量库和知识目录只允许可信管理员写入；快照校验和用于完整性检查，不是签名。
 
----
-
-# 🔐 Security
-
-
-Before uploading to GitHub:
-
-
-Make sure:
-
-
+运行实际模型检索评估：
+```bash
+python scripts/evaluate_rag.py
 ```
-.env
-```
+输出 Hit@k、MRR 和逐条命中来源；测试中的确定性向量只验证流程，
+不能作为真实模型质量指标。
 
+## 部署与开发
 
-is ignored.
+- [配置、容器与部署说明](docs/deployment.md)
+- [架构与失败处理](docs/architecture.md)
+- [安全边界](SECURITY.md)
+- [贡献与测试](CONTRIBUTING.md)
 
-
-Example `.gitignore`:
-
-
-```
-.env
-
-__pycache__/
-
-*.pyc
-
-vector_db/
-
-.venv/
-
+运行测试：
+```bash
+python -m pip install --require-hashes -r requirements-dev.lock
+python -m pytest -q
+python -m ruff check .
+python -m ruff format --check .
 ```
 
-
-
-Never upload:
-
-
-- API Keys
-- Tokens
-- Private configuration
-- Local vector database
-
-
-
----
-
-# 🗺 Roadmap
-
-
-## v2.0
-
-
-Completed:
-
-
-- [x] Multi-Agent architecture
-- [x] Agent Manager
-- [x] RAG knowledge retrieval
-- [x] FAISS vector database
-- [x] Ollama integration
-- [x] DeepSeek API integration
-- [x] Automatic repair suggestions
-
-
-
----
-
-
-## v2.1
-
-
-Planned:
-
-
-- [ ] Better Supervisor Agent reasoning
-- [ ] More network diagnostic tools
-- [ ] Tool Calling support
-- [ ] Linux network diagnostics
-
-
-
----
-
-
-## v3.0
-
-
-Future:
-
-
-- [ ] Web UI
-- [ ] Long-term memory
-- [ ] Autonomous repair execution
-- [ ] Distributed Agent system
-
-
-
----
-
-# 🤝 Contribution
-
-
-Contributions are welcome.
-
-
-Feel free to:
-
-- Submit issues
-- Improve agents
-- Add knowledge documents
-- Add new LLM providers
-
-
-
----
-
-# 📄 License
-
-
-MIT License
-
-
----
-
-# ⭐ Star
-
-
-If this project helps you,
-please consider giving it a ⭐.
+MIT License。
